@@ -14,6 +14,12 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Home Route
+app.get("/", (req, res) => {
+  res.send("Book Management Backend is Running Successfully!");
+});
+
+// Book Routes
 app.use("/api/books", bookRoutes);
 
 async function startServer() {
