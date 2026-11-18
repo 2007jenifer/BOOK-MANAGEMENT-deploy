@@ -23,16 +23,22 @@ function AddBook() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/api/books", {
-        ...book,
-        price: Number(book.price),
-      });
+      await axios.post(
+        "https://book-management-deploy.onrender.com/api/books",
+        {
+          ...book,
+          price: Number(book.price),
+        },
+      );
 
       alert("Book added successfully!");
       navigate("/books");
     } catch (error) {
-      console.error("Error adding book:", error);
-      alert("Failed to add book. Check the backend terminal.");
+      console.error(
+        "Error adding book:",
+        error.response?.data || error.message,
+      );
+      alert("Failed to add book. Please check backend connection.");
     }
   };
 

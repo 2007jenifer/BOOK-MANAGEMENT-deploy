@@ -5,10 +5,12 @@ import { Link } from "react-router-dom";
 function ViewBooks() {
   const [books, setBooks] = useState([]);
 
+  const API_URL = "https://book-management-deploy.onrender.com/api/books";
+
   // Fetch all books
   const fetchBooks = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/books");
+      const response = await axios.get(API_URL);
       setBooks(response.data);
     } catch (error) {
       console.log("Error fetching books:", error);
@@ -28,11 +30,10 @@ function ViewBooks() {
     if (!confirmDelete) return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/books/${id}`);
+      await axios.delete(`${API_URL}/${id}`);
 
       alert("Book deleted successfully!");
 
-      // Refresh book list
       fetchBooks();
     } catch (error) {
       console.log("Error deleting book:", error);

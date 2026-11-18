@@ -6,6 +6,8 @@ function EditBook() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const API_URL = "https://book-management-deploy.onrender.com/api/books";
+
   const [book, setBook] = useState({
     title: "",
     author: "",
@@ -19,9 +21,7 @@ function EditBook() {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/books/${id}`,
-        );
+        const response = await axios.get(`${API_URL}/${id}`);
 
         setBook({
           title: response.data.title || "",
@@ -53,7 +53,7 @@ function EditBook() {
     e.preventDefault();
 
     try {
-      await axios.put(`http://localhost:5000/api/books/${id}`, {
+      await axios.put(`${API_URL}/${id}`, {
         ...book,
         price: Number(book.price),
       });
